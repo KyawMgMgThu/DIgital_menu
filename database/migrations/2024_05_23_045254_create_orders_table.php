@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->decimal('grand_total', 10, 2)->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
-            $table->enum('status', ['new', 'processing', 'shipped', 'delivered', 'cancelled'])->default('new');
+            $table->enum('status', ['ဆိုင်ထိုင်', 'ပါဆယ်', 'cancelled'])->default('ဆိုင်ထိုင်');
+            $table->enum('table_no', ['none', '1', '2', '3', '4', '5', '6', '7', '8', '9'])->default('none');
             $table->timestamps();
         });
     }

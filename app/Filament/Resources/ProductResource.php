@@ -21,12 +21,15 @@ use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use Filament\Tables\Filters\SelectFilter;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {
@@ -132,6 +135,8 @@ class ProductResource extends Resource
             ])
             ->filters([
                 //
+                SelectFilter::make('category')
+                    ->relationship('category', 'name'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
