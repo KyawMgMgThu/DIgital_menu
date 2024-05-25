@@ -1,6 +1,8 @@
 <?php
 
+use App\Livewire\CheckoutPage;
 use App\Livewire\HomePage;
+use App\Livewire\MainPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomePage::class)->name('home');
+Route::get('/menu', MainPage::class)->name('menu');
+Route::get('/checkout', CheckoutPage::class)->name('checkout');
