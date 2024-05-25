@@ -120,8 +120,7 @@ class OrderResource extends Resource
                                 TextInput::make('unit_amount')
                                     ->numeric()
                                     ->required()
-                                    ->dehydrated()
-                                    ->disabled(),
+                                    ->dehydrated(),
 
                                 TextInput::make('total_amount')
                                     ->numeric()

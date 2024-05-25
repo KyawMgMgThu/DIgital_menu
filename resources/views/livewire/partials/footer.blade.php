@@ -6,7 +6,7 @@
         <li>
             <a wire:navigate href="{{ route('checkout') }}"><i
                     class="bi bi-cart-fill {{ request()->routeIs('checkout') ? 'text-primary' : '' }} "></i><span
-                    class="badge bg-warning text-dark">3</span></a>
+                    class="badge bg-warning text-dark">{{ $total_count }}</span></a>
         </li>
         <li>
             <a href="#"id="scrollToTop"><i class="bi bi-arrow-up-square-fill"></i></a>

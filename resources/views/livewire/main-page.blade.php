@@ -23,7 +23,10 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-price pt-2 ">{{ $product->price }}Ks</p>
-                        <button type="button" class="btn btn-warning">မှာယူမည်</button>
+                        <a wire:click.prevent="addToCart({{ $product->id }})" type="button"
+                            class="btn btn-warning"><span wire:loading.remove
+                                wire:target='addToCart({{ $product->id }})'>မှာယူမည်</span><span wire:loading
+                                wire:target='addToCart({{ $product->id }})'>Loading...</span></a>
                     </div>
                 </div>
             </div>
