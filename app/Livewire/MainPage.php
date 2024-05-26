@@ -19,6 +19,7 @@ class MainPage extends Component
     #[Url]
     public $selected_categories = [];
 
+
     //add product to cart
     public function addToCart($product_id)
     {

@@ -18,6 +18,6 @@
     const footer = document.querySelector('footer');
     window.onscroll = function() {
 
-        window.scrollY > 80 ? footer.classList.remove('d-none') : footer.classList.add('d-none');
+        window.scrollY > 200 ? footer.classList.remove('d-none') : footer.classList.add('d-none');
     }
 </script>

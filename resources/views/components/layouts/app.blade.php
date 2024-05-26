@@ -25,9 +25,6 @@
 
     <x-livewire-alert::scripts />
 </body>
-
-<script src="{{ asset('asset/bootstrap/js/bootstrap.min.js') }}"></script>
-
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="{{ asset('asset/js/script.js') }}"></script>
 <script>
