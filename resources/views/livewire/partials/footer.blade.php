@@ -1,23 +1,22 @@
-<footer class="container shadow-lg">
-    <ul class="d-flex justify-content-between mt-2"id="footer-nav">
-        <li><a wire:navigate href="{{ route('menu') }}">
-                <i class="bi bi-house-door-fill {{ request()->routeIs('menu') ? 'text-primary' : '' }}"></i>
-            </a></li>
-        <li>
-            <a wire:navigate href="{{ route('checkout') }}"><i
-                    class="bi bi-cart-fill {{ request()->routeIs('checkout') ? 'text-primary' : '' }} "></i><span
-                    class="badge bg-warning text-dark">{{ $total_count }}</span></a>
-        </li>
-        <li>
-            <a href="#"id="scrollToTop"><i class="bi bi-arrow-up-square-fill"></i></a>
-        </li>
-    </ul>
+<div>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.github.com/kyawmgmgthu" class="instagram"><i class="bx bxl-github"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; Copyright <strong><span>Digital Menu</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Developed by
+                <a href="#" target="_blank">Kyaw Mg Mg Thu & Zar Ni Maung</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
 
-</footer>
-<script>
-    const footer = document.querySelector('footer');
-    window.onscroll = function() {
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-        window.scrollY > 200 ? footer.classList.remove('d-none') : footer.classList.add('d-none');
-    }
-</script>
+</div>

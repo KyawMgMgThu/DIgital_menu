@@ -13,10 +13,15 @@ class OrderStats extends BaseWidget
     {
         return [
             //
-            Stat::make('ဆိုင်ထိုင် Order', Order::query()->where('status', 'ဆိုင်ထိုင်')->count()),
-            Stat::make('ပါဆယ် Order', Order::query()->where('status', 'ပါဆယ်')->count()),
+            Stat::make('ဆိုင်ထိုင် Order', Order::query()->where('status', 'ဆိုင်ထိုင်')->count())
+                ->chart([7, 2, 10, 3, 15, 4, 17])
+                ->color('success'),
+            Stat::make('ပါဆယ် Order', Order::query()->where('status', 'ပါဆယ်')->count())
+                ->chart([2, 3, 7, 6, 8, 4, 10])
+                ->color('warning'),
             Stat::make('Cancelled Order', Order::query()->where('status', 'cancelled')->count()),
-            Stat::make('Average Order Price', number_format(Order::query()->avg('grand_total'), 2)),
+            Stat::make('Average Order Price', number_format(Order::query()->avg('grand_total'), 2))
+                ->chart([7, 2, 10, 3, 15, 4, 17]),
 
         ];
     }

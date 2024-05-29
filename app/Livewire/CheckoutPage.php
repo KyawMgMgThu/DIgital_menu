@@ -8,6 +8,7 @@ use Livewire\Attributes\Title;
 use App\Helpers\CartManagement;
 use App\Livewire\Partials\Footer;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Psy\VersionUpdater\Checker;
 
 #[Title('Checkout Page - Digital Menu')]
 class CheckoutPage extends Component
@@ -50,10 +51,15 @@ class CheckoutPage extends Component
         $order->status = $this->status;
         $order->table_no = $this->table_no;
 
-        $redirect_url = route('menu');
+        $redirect_url = route('home');
         $order->save();
         $order->item()->createMany($cart_items);
         CartManagement::removeCartItemsFromCookies();
+        $this->alert('success', 'မှာယူခြင်း အောင်မြင်ပါသည်', [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => true,
+        ]);
 
         return redirect($redirect_url);
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
             $table->enum('status', ['ဆိုင်ထိုင်', 'ပါဆယ်', 'cancelled'])->default('ဆိုင်ထိုင်');
-            $table->enum('table_no', ['none', '1', '2', '3', '4', '5', '6', '7', '8', '9'])->default('none');
+            $table->string('table_no')->default('none'); // Changed to string
             $table->timestamps();
         });
     }
