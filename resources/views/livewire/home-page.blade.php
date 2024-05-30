@@ -66,19 +66,28 @@
                 <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
                     @foreach ($products as $product)
                         <div class="col-lg-6 menu-item filter-drinks">
-                            <img src="{{ url('storage', $product->images) }}" class="menu-img"
-                                alt="{{ $product->name }}" />
+                            @if (is_array($product->images) && count($product->images) > 0)
+                                <img src="{{ Storage::url($product->images[0]) }}" class="menu-img"
+                                    alt="{{ $product->name }}" />
+                            @else
+                                <img src="{{ Storage::url($product->images) }}" class="menu-img"
+                                    alt="{{ $product->name }}" />
+                            @endif
                             <div class="menu-item-details">
                                 <div class="menu-content">
                                     <a href="#"> {{ $product->name }}</a><span>{{ $product->price }}Ks</span>
                                 </div>
                                 <div>
                                     <a wire:click.prevent="addToCart({{ $product->id }})" type="button"
-                                        class="btn btn-warning">မှာယူမည်</a>
+                                        class="btn btn-warning"><span wire:loading.remove
+                                            wire:target='addToCart({{ $product->id }})'>မှာယူမည်</span><span
+                                            wire:loading
+                                            wire:target='addToCart({{ $product->id }})'>Loading...</span></a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+
                 </div>
             </div>
         </section>
