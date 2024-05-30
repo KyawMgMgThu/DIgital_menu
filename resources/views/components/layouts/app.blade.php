@@ -23,7 +23,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css" />
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
     @livewireStyles()
 </head>
 
@@ -45,6 +45,7 @@
 <!-- <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script> -->
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+<script src="{{ asset('assets/js/index.js') }}"></script>
 
 
 
