@@ -10,6 +10,7 @@ use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\OrderResource;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Support\Facades\URL;
 
 class LatestOrders extends BaseWidget
 {
@@ -29,7 +30,8 @@ class LatestOrders extends BaseWidget
                     ->sortable(),
                 Tables\Columns\TextColumn::make('grand_total')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->money('MMK'),
                 Tables\Columns\TextColumn::make('payment_method')
                     ->searchable()
                     ->sortable(),
@@ -59,6 +61,16 @@ class LatestOrders extends BaseWidget
                 Tables\Actions\Action::make('View Orders')
                     ->url(fn (Order $record): string => OrderResource::getUrl('view', ['record' => $record->id]))
                     ->icon('heroicon-o-eye'),
+                Tables\Actions\Action::make('Download_Pdf')
+                    ->icon('heroicon-o-document')
+                    ->action(function (Order $record) {
+                        $url = URL::temporarySignedRoute(
+                            'download.order.pdf',
+                            now()->addMinutes(30),
+                            ['order' => $record->id]
+                        );
+                        return redirect($url);
+                    }),
             ]);
     }
 }

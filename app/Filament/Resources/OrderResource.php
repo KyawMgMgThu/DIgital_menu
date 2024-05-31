@@ -9,8 +9,10 @@ use App\Models\Product;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
+use App\Models\OrderItem;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
@@ -23,7 +25,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\ToggleButtons;
 use App\Filament\Resources\OrderResource\Pages;
-
+use Illuminate\Support\Facades\URL;
 
 class OrderResource extends Resource
 {
@@ -31,10 +33,6 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
     protected static ?string $recordTitleAttribute = 'status';
-
-
-
-
 
     public static function form(Form $form): Form
     {
@@ -106,8 +104,11 @@ class OrderResource extends Resource
                                     ->distinct()
                                     ->disableOptionsWhenSelectedInSiblingRepeaterItems()
                                     ->reactive()
-                                    ->afterStateUpdated(fn ($state, Set $set) => $set('unit_amount', Product::find($state)?->price ?? 0))
-                                    ->afterStateUpdated(fn ($state, Set $set) => $set('total_amount', Product::find($state)?->price ?? 0)),
+                                    ->afterStateUpdated(function ($state, Set $set) {
+                                        $price = Product::find($state)?->price ?? 0;
+                                        $set('unit_amount', $price);
+                                        $set('total_amount', $price);
+                                    }),
 
                                 TextInput::make('quantity')
                                     ->numeric()
@@ -159,7 +160,7 @@ class OrderResource extends Resource
                 TextColumn::make('grand_total')
                     ->numeric()
                     ->sortable()
-                    ->money(),
+                    ->money('MMK'), // Assuming MMK as currency
                 TextColumn::make('payment_method')
                     ->searchable()
                     ->sortable(),
@@ -187,7 +188,6 @@ class OrderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
                 SelectFilter::make('payment_status')->options([
                     'pending' => 'Pending',
                     'paid' => 'Paid',
@@ -203,6 +203,16 @@ class OrderResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Action::make('Download_Pdf')
+                    ->icon('heroicon-o-document')
+                    ->action(function (Order $record) {
+                        $url = URL::temporarySignedRoute(
+                            'download.order.pdf',
+                            now()->addMinutes(30),
+                            ['order' => $record->id]
+                        );
+                        return redirect($url);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
