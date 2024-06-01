@@ -203,7 +203,7 @@ class OrderResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Action::make('Download_Pdf')
+                Action::make('Voucher')
                     ->icon('heroicon-o-document')
                     ->action(function (Order $record) {
                         $url = URL::temporarySignedRoute(

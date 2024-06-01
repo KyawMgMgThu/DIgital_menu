@@ -61,7 +61,7 @@ class LatestOrders extends BaseWidget
                 Tables\Actions\Action::make('View Orders')
                     ->url(fn (Order $record): string => OrderResource::getUrl('view', ['record' => $record->id]))
                     ->icon('heroicon-o-eye'),
-                Tables\Actions\Action::make('Download_Pdf')
+                Tables\Actions\Action::make('Voucher')
                     ->icon('heroicon-o-document')
                     ->action(function (Order $record) {
                         $url = URL::temporarySignedRoute(

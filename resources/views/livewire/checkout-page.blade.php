@@ -17,7 +17,7 @@
                                     <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our
                                         Menu</a>
                                     <a href="{{ route('checkout') }}"
-                                        class="btn-book animate__animated animate__fadeInUp scrollto">Book a Food</a>
+                                        class="btn-book animate__animated animate__fadeInUp scrollto">Book a Menu</a>
                                 </div>
                             </div>
                         </div>

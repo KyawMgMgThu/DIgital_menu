@@ -22,13 +22,13 @@ class CheckoutPage extends Component
     public $table_no;
     public $payment_method;
     public $payment_status;
-    public $status;
+    public $status = 'ဆိုင်ထိုင်';
 
     public function placeOrder()
     {
         $this->validate([
-            'table_no' => 'required',
-            'status' => 'required|in:ဆိုင်ထိုင်,ပါဆယ်', // Ensure validation matches enum values
+            'table_no' => 'required_if:status,==,ဆိုင်ထိုင်',
+            'status' => 'required|in:ဆိုင်ထိုင်,ပါဆယ်',
         ]);
 
         $cart_items = CartManagement::getCartItemsFromCookies();
@@ -50,7 +50,7 @@ class CheckoutPage extends Component
         $order->payment_method = 'cash';
         $order->payment_status = 'pending';
         $order->status = $this->status;
-        $order->table_no = $this->table_no;
+        $order->table_no = $this->status == 'ဆိုင်ထိုင်' ? $this->table_no : 'none';
 
         $redirect_url = route('home');
         $order->save();
