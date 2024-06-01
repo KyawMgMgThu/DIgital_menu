@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use App\Helpers\CartManagement;
 use App\Livewire\Partials\Footer;
+use App\Livewire\Partials\Navbar;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Psy\VersionUpdater\Checker;
 
@@ -75,7 +76,7 @@ class CheckoutPage extends Component
     {
         $this->cart_items = CartManagement::removeItemFromCart($product_id);
         $this->grant_total = CartManagement::calculateCartTotal($this->cart_items);
-        $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Footer::class);
+        $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
     }
 
     public function increaseQty($product_id)

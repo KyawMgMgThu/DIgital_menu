@@ -123,7 +123,7 @@
                         </div>
                     </div>
                     <div class="row my-3">
-                        <div class="col-5">
+                        <div class="col-6">
                             <a href="{{ route('home') }}">
                                 <button type="button" class="btn btn-warning">ထပ်ဝယ်မည်</button>
                             </a>

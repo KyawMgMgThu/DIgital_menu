@@ -19,10 +19,9 @@
                 <ul>
                     <li><a class="nav-link scrollto" href="{{ route('home') }}">Home</a></li>
                     <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-                    <li><a wire:navigate href="{{ route('checkout') }}" class="book-a-table-btn scrollto"><i
-                                class="bi bi-cart-fill"><span
-                                    class="badge bg-warning text-dark">{{ $total_count }}</span>Book a
-                                Food</i></a></li>
+                    <li><a wire:navigate href="{{ route('checkout') }}" class="nav-link scrollto">
+                            Book a Menu
+                        </a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -31,4 +30,9 @@
         </div>
     </header>
     <!-- End Header -->
+    <a wire:navigate href="{{ route('checkout') }}" class="back-to-top">
+        <i class="bi bi-cart-fill">
+            <span class="badge text-dark">{{ $total_count }}</span>
+        </i>
+    </a>
 </div>

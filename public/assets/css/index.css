@@ -39,31 +39,45 @@ body {
     position: fixed;
     visibility: hidden;
     opacity: 0;
-    right: 15px;
-    bottom: 15px;
+    right: 8%;
+    bottom: 10%;
+    transform: translate(50%, 50%);
     z-index: 996;
-    background: #ffb03b;
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
+    background: #47e00f;
+    width: 45px; /* Increased size for better visibility */
+    height: 45px; /* Increased size for better visibility */
+    border-radius: 50%;
     transition: all 0.4s;
-  }
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    justify-content: center;
+    text-align: center;
+}
 
-  .back-to-top i {
-    font-size: 28px;
+.back-to-top i {
+    font-size: 20px;
     color: #fff;
-    line-height: 0;
-  }
+    line-height: 40px; /* Adjusted for vertical alignment */
+    margin-top: 10px; /* Added margin to position at top */
+}
 
-  .back-to-top:hover {
-    background: #ffc064;
+.back-to-top:hover {
+    background: #47e00f;
     color: #fff;
-  }
+}
 
-  .back-to-top.active {
+.back-to-top.active {
     visibility: visible;
     opacity: 1;
-  }
+}
+
+.badge {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 0.8rem; /* Adjusted for better fit */
+}
+
 
   /*--------------------------------------------------------------
   # Top Bar

@@ -19,6 +19,7 @@ class HomePage extends Component
 {
     use LivewireAlert;
     #[Url]
+    public $total_count = 0;
     public $selected_categories = [];
 
 
@@ -28,7 +29,7 @@ class HomePage extends Component
         $total_count = CartManagement::addItemToCart($product_id);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
         $this->alert('success', 'မှာယူဖို့အတွက် ဈေးခြင်းထဲထည့်ခြင်း အောင်မြင်ပါသည်', [
-            'position' => 'bottom-end',
+            'position' => 'center',
             'timer' => 3000,
             'toast' => true,
         ]);
