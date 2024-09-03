@@ -40,12 +40,18 @@ class OrderResource extends Resource
             ->schema([
                 Group::make()->schema([
                     Section::make('Order Information')->schema([
+    
+                        TextInput::make('order_id')
+                            ->label('Order ID')
+                            ->default(fn () => 'ORD-' . strtoupper(uniqid())) // Example unique ID generation
+                            ->required(),
+    
                         Select::make('payment_method')
                             ->options([
                                 'cash' => 'Cash',
                                 'credit card' => 'Credit Card'
                             ])->required(),
-
+    
                         Select::make('payment_status')
                             ->options([
                                 'pending' => 'Pending',
@@ -53,7 +59,7 @@ class OrderResource extends Resource
                                 'failed' => 'Failed',
                             ])->default('pending')
                             ->required(),
-
+    
                         ToggleButtons::make('status')
                             ->inline()
                             ->default('ဆိုင်ထိုင်')
@@ -73,7 +79,7 @@ class OrderResource extends Resource
                                 'ပါဆယ်' => 'heroicon-m-check-badge',
                                 'cancelled' => 'heroicon-m-x-circle',
                             ]),
-
+    
                         ToggleButtons::make('table_no')
                             ->inline()
                             ->default('none')
@@ -91,7 +97,7 @@ class OrderResource extends Resource
                                 '9' => '9',
                             ])
                     ])->columns(2),
-
+    
                     Section::make('Order Items')->schema([
                         Repeater::make('item')
                             ->relationship()
@@ -109,7 +115,7 @@ class OrderResource extends Resource
                                         $set('unit_amount', $price);
                                         $set('total_amount', $price);
                                     }),
-
+    
                                 TextInput::make('quantity')
                                     ->numeric()
                                     ->required()
@@ -117,18 +123,18 @@ class OrderResource extends Resource
                                     ->minValue(1)
                                     ->reactive()
                                     ->afterStateUpdated(fn ($state, Set $set, Get $get) => $set('total_amount', $state * $get('unit_amount'))),
-
+    
                                 TextInput::make('unit_amount')
                                     ->numeric()
                                     ->required()
                                     ->dehydrated(),
-
+    
                                 TextInput::make('total_amount')
                                     ->numeric()
                                     ->dehydrated()
                                     ->required(),
                             ])->columns(2),
-
+    
                         Placeholder::make('grand_total_placeholder')
                             ->label('Total')
                             ->content(function (Get $get, Set $set) {
@@ -136,24 +142,29 @@ class OrderResource extends Resource
                                 if (!$repeaterItems = $get('item')) {
                                     return $total;
                                 }
-
+    
                                 foreach ($repeaterItems as $key => $item) {
                                     $total += $get("item.{$key}.total_amount");
                                 }
                                 $set('grand_total', $total);
                                 return $total . ' Ks';
                             }),
-
+    
                         Hidden::make('grand_total')->dehydrated(),
                     ])
                 ])->columnSpan(3)
             ]);
     }
+    
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                ->label('Order ID') 
+                ->sortable()
+                ->searchable(),
                 TextColumn::make('table_no')
                     ->searchable()
                     ->sortable(),

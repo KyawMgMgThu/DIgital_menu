@@ -23,6 +23,8 @@ class CheckoutPage extends Component
     public $payment_method;
     public $payment_status;
     public $status = 'ဆိုင်ထိုင်';
+    public $order_id;
+    public $total_orders; 
 
     public function placeOrder()
     {
@@ -44,25 +46,28 @@ class CheckoutPage extends Component
                 ],
             ];
         }
-
+        $this->total_orders = Order::count();
         $order = new Order();
         $order->grand_total = CartManagement::calculateCartTotal($cart_items);
         $order->payment_method = 'cash';
         $order->payment_status = 'pending';
         $order->status = $this->status;
         $order->table_no = $this->status == 'ဆိုင်ထိုင်' ? $this->table_no : 'none';
-
-        $redirect_url = route('home');
+        
+       
         $order->save();
+        $this->order_id = $order->id;
+        
         $order->item()->createMany($cart_items);
         CartManagement::removeCartItemsFromCookies();
-        $this->alert('success', 'မှာယူခြင်း အောင်မြင်ပါသည်', [
-            'position' => 'center',
-            'timer' => 3000,
-            'toast' => true,
+        $this->alert('success', "Order placed successfully! Order ID: {$this->order_id}", [
+        'position' => 'center',
+        'timer' => 90000,
         ]);
-
-        return redirect($redirect_url);
+        
+        
+        $this->cart_items = [];
+        $this->grant_total = 0;
     }
 
     public function mount()
@@ -97,4 +102,6 @@ class CheckoutPage extends Component
         $grant_total = CartManagement::calculateCartTotal($cart_items);
         return view('livewire.checkout-page', compact('cart_items', 'grant_total'));
     }
+
+
 }
