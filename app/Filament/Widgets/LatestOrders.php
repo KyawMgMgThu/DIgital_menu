@@ -25,6 +25,10 @@ class LatestOrders extends BaseWidget
             ->defaultSort('created_at', 'desc')
             ->columns([
                 // ...
+                Tables\Columns\TextColumn::make('id')
+                ->label('Order ID') 
+                ->sortable()
+                ->searchable(),
                 Tables\Columns\TextColumn::make('table_no')
                     ->searchable()
                     ->sortable(),
